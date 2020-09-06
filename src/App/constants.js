@@ -4,5 +4,5 @@ export const SCREEN = {
   GAME_OVER: 2,
 };
 
-export const GAME_WIDTH = 600;
-export const GAME_HEIGHT = 400;
+export const GAME_WIDTH = 1200;
+export const GAME_HEIGHT = 600;

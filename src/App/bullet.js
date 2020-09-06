@@ -1,46 +1,43 @@
-import { SCREEN, GAME_HEIGHT, GAME_WIDTH } from './constants';
+import { SCREEN, GAME_HEIGHT, GAME_WIDTH } from "./constants";
 
 // eslint-disable-next-line
 export class Bullet {
+  dead = false;
 
-    speed = 5
+  angle;
 
-    dead = false
+  xPosition;
 
-    angle;
+  yPosition;
 
-    xPosition;
+  speed = 10;
 
-    yPosition
+  constructor(angle, xPosition, yPosition) {
+    this.angle = angle;
+    this.xPosition = xPosition;
+    this.yPosition = yPosition;
+  }
 
-    speed = 5;
+  update = () => {
+    const x = Math.sin(this.angle) * this.speed;
+    const y = Math.cos(this.angle) * this.speed;
+    this.xPosition += x;
+    this.yPosition += y;
 
-    constructor(angle, xPosition, yPosition) {
-      this.angle = angle;
-      this.xPosition = xPosition;
-      this.yPosition = yPosition;
+    if (this.xPosition < 0 || this.xPosition > GAME_WIDTH) {
+      this.dead = true;
     }
-
-    update = () => {
-      const x = Math.sin(this.angle) * this.speed;
-      const y = Math.cos(this.angle) * this.speed;
-      this.xPosition += x;
-      this.yPosition += y;
-
-      if (this.xPosition < 0 || this.xPosition > GAME_WIDTH) {
-        this.dead = true;
-      }
-      if (this.yPosition < 0 || this.yPosition > GAME_HEIGHT) {
-        this.dead = true;
-      }
+    if (this.yPosition < 0 || this.yPosition > GAME_HEIGHT) {
+      this.dead = true;
     }
+  };
 
-    draw = (ctx) => {
-      ctx.beginPath();
-      ctx.arc(this.xPosition, this.yPosition, 5, 0, 2 * Math.PI);
-      ctx.fillStyle = 'brown';
-      ctx.fill();
-      ctx.lineWidth = 0.3;
-      ctx.stroke();
-    }
+  draw = (ctx) => {
+    ctx.beginPath();
+    ctx.arc(this.xPosition, this.yPosition, 7, 0, 2 * Math.PI);
+    ctx.fillStyle = "brown";
+    ctx.fill();
+    ctx.lineWidth = 0.3;
+    ctx.stroke();
+  };
 }
